@@ -10,6 +10,8 @@
   --font: "Poppins", system-ui, sans-serif;
   --script: "Great Vibes", "Segoe Script", cursive;
   --serif: "DM Serif Display", Georgia, serif;
+  --safe-b: env(safe-area-inset-bottom, 0px);   /* area aman iPhone/iPad */
+  --nav-gap: .8rem;                              /* jarak tombol navigasi dari tepi bawah layar */
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -166,7 +168,7 @@ img { display: block; max-width: 100%; user-select: none; -webkit-user-drag: non
 .hub-item:hover { transform: scale(1.07); }
 
 /* ---------- 6a. MESSAGE ---------- */
-#message { text-align: center; padding: 3vh 4vw 4vh; }
+#message { text-align: center; padding: 3vh 4vw calc(4vh + var(--safe-b)); }
 .msg-head { max-width: 46rem; margin: 0 auto; }
 .msg-badge { display: inline-block; padding: .45em 1.6em; font-size: .68rem; letter-spacing: .12em; font-weight: 700; color: #fff; background: rgba(255, 255, 255, .28); border: 1px solid rgba(255, 255, 255, .5); border-radius: 999px; }
 .msg-title { margin-top: .5rem; font-family: var(--serif); font-weight: 400; font-size: clamp(2.6rem, 4.2vw, 5rem); color: #fff; text-shadow: 0 4px 16px rgba(217, 79, 128, .25); }
@@ -217,7 +219,7 @@ img { display: block; max-width: 100%; user-select: none; -webkit-user-drag: non
 #flower .btn-glass { margin: 0 0 6vh; }
 
 /* ---------- 6c. GALLERY ---------- */
-#gallery { text-align: center; padding: 3vh 4vw 12vh; }
+#gallery { text-align: center; padding: 3vh 4vw 0; }
 .ga-head { max-width: 36rem; margin: 0 auto 2rem; }
 .ga-title { font-family: var(--serif); font-weight: 400; font-size: clamp(2.6rem, 3.8vw, 4.6rem); color: #c2456f; }
 .ga-desc { margin-top: .7rem; font-size: .85rem; line-height: 1.7; color: #a35b76; }
@@ -231,10 +233,10 @@ img { display: block; max-width: 100%; user-select: none; -webkit-user-drag: non
 .screen.active .ga-grid .ph { animation: rise .8s both; animation-delay: calc(var(--i) * .07s); }
 .ga-actions { display: flex; justify-content: center; gap: .9rem; margin-top: 1.6rem; }
 .ga-actions button { padding: .7em 2.2em; font-size: .85rem; }
-.ga-foot { margin-top: .9rem; font-size: .7rem; color: #b06a86; }
+.ga-foot { margin-top: .9rem; padding-bottom: calc(12vh + var(--safe-b)); font-size: .7rem; color: #b06a86; }
 
 /* ---------- Chatbot ---------- */
-.chat { position: fixed; right: 1.2rem; bottom: 1.4rem; z-index: 20; opacity: 0; pointer-events: none; transition: opacity .5s; }
+.chat { position: fixed; right: 1.2rem; bottom: calc(1.4rem + var(--safe-b)); z-index: 20; opacity: 0; pointer-events: none; transition: opacity .5s; }
 .chat.show { opacity: 1; pointer-events: auto; }
 .chat-fab { position: relative; width: 3.6rem; height: 3.6rem; border-radius: 50%; background: #fff; font-size: 1.6rem; box-shadow: 0 10px 26px rgba(217, 79, 128, .35); display: grid; place-items: center; transition: transform .25s; }
 .chat-fab:hover { transform: scale(1.08); }
@@ -286,8 +288,17 @@ img { display: block; max-width: 100%; user-select: none; -webkit-user-drag: non
 .mu-heart { top: 4vh; right: 2.4vw; width: clamp(40px, 3.2vw, 80px); filter: invert(1); }
 .mu-cake { left: 4vw; bottom: 5vh; width: clamp(50px, 5vw, 110px); }
 .mu-balloon { right: 3.5vw; bottom: 4vh; width: clamp(50px, 5vw, 110px); }
-.mu-back { position: absolute !important; left: 50%; bottom: 3.5vh; transform: translateX(-50%); z-index: 3; }
+.mu-back { position: absolute !important; left: 50%; bottom: max(3.5vh, calc(var(--safe-b) + var(--nav-gap))); transform: translateX(-50%); z-index: 3; }
 .mu-back:hover { transform: translateX(-50%) translateY(-2px) scale(1.03); }
+
+/* ---------- Navigasi bawah: selalu terlihat di viewport ----------
+   Tombol Back/Kembali/Next menempel (sticky) di tepi bawah layar saat konten lebih
+   tinggi dari layar, dan kembali ke posisi normalnya saat konten sudah muat / di ujung scroll. */
+.pz-actions, .ga-actions, #message > [data-go="hub"], #flower > .btn-glass {
+  position: sticky; bottom: calc(var(--safe-b) + var(--nav-gap)); z-index: 6;
+}
+#message > [data-go="hub"] { display: block; margin-left: auto; margin-right: auto; }
+.pz-actions .btn-white, .ga-actions button { -webkit-tap-highlight-color: transparent; }
 
 /* ---------- Veil ---------- */
 #veil { position: fixed; inset: 0; z-index: 100; background: #000; opacity: 0; pointer-events: none; transition: opacity .6s ease; }
@@ -312,8 +323,8 @@ img { display: block; max-width: 100%; user-select: none; -webkit-user-drag: non
   .fl-bubble { position: static !important; max-width: none; padding: .9rem .8rem; font-size: .85rem; border-radius: 1.2rem; display: grid; place-items: center; }
   #flower .btn-glass { margin-bottom: 4vh; }
   .ga-card { padding: 1rem; border-radius: 1.8rem; }
-  .chat { right: .6rem; bottom: .8rem; }
-  .chat-panel { position: fixed; right: .6rem; left: .6rem; bottom: .6rem; width: auto; height: min(34rem, 78vh); }
+  .chat { right: .6rem; bottom: calc(var(--safe-b) + 4.6rem); }   /* di atas tombol navigasi */
+  .chat-panel { position: fixed; right: .6rem; left: .6rem; bottom: calc(.6rem + var(--safe-b)); width: auto; height: min(34rem, 78vh); }
   .pz-card { padding: 1.8rem 1.4rem 2rem; border-radius: 2rem; }
   .pz-title { font-size: 2rem; }
   .mu-title { top: 3vh; font-size: 2.9rem; padding: 0 3vw; }
