@@ -52,7 +52,7 @@ window.CONFIG = {
     /* GANTI password di sini. Boleh lebih dari satu jawaban. Tidak peduli huruf besar/kecil. */
     answer: ['blubub'],
     title: 'Masukan Password 💖',
-    hint: 'Panggilan sayang yang kata kamu nyebelin buat kamu, lima huruf aja 🤍',
+    hint: 'Panggilan sayang yang kata kamu nyebelin buat kamu, enam huruf aja 🤍',
     placeholder: 'Masukan password...',
     button: 'Masuk',
 
