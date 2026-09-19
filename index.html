@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Happy Birthday</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Great+Vibes&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<main id="app">
+
+  <!-- 1. PASSWORD -->
+  <section class="screen bg-main active" id="password">
+    <div class="pw-wrap">
+      <div class="pw-card">
+        <img class="pw-deco pw-deco-heart" data-decor="doodle" alt="">
+        <img class="pw-deco pw-deco-balloon" data-decor="balloon" alt="">
+        <div class="pw-inner">
+        <img class="pw-icon" data-decor="doodle" alt="">
+        <h1 class="pw-title" data-t="password.title"></h1>
+        <p class="pw-hint" data-t="password.hint"></p>
+        <form class="pw-form" id="pwForm" autocomplete="off">
+          <input id="pwInput" type="text" autocomplete="off" autocapitalize="off" spellcheck="false">
+          <button type="submit" class="btn-white" data-t="password.button"></button>
+        </form>
+        </div>
+      </div>
+    </div>
+    <div class="pw-dim" id="pwDim"></div>
+    <div class="pw-popup" id="pwPopup">
+      <h2 data-t="password.wrong.title"></h2>
+      <p data-t="password.wrong.text"></p>
+    </div>
+  </section>
+
+  <!-- 2. PUZZLE -->
+  <section class="screen bg-main" id="puzzle">
+    <div class="pz-card">
+      <h1 class="pz-title" data-t="puzzle.title"></h1>
+      <p class="pz-sub" data-t="puzzle.subtitle"></p>
+      <div class="pz-board" id="pzBoard"></div>
+      <div class="pz-actions">
+        <button class="btn-white" id="pzShuffle" data-t="puzzle.shuffle"></button>
+        <button class="btn-white" data-go="envelope" data-t="puzzle.next"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. AMPLOP -->
+  <section class="screen bg-main" id="envelope">
+    <h1 class="script big-title fx" style="--i:0" data-t="envelope.title"></h1>
+    <img class="env-balloon float" data-decor="balloon" alt="">
+    <img class="env-ornament" data-decor="doodle" alt="">
+    <button class="env-btn fx" style="--i:1" id="envBtn" aria-label="Buka amplop">
+      <img class="env-img" data-decor="envelope" alt="Amplop">
+    </button>
+    <p class="env-hint fx" style="--i:2" data-t="envelope.hint"></p>
+  </section>
+
+  <!-- 4. HALAMAN SAPAAN -->
+  <section class="screen" id="greeting">
+    <div class="gr-bg" id="grBg"></div>
+    <div class="gr-tint"></div>
+    <img class="env-balloon float" data-decor="balloon" alt="">
+    <img class="env-ornament" data-decor="doodle" alt="">
+    <div class="gr-card fx" style="--i:0">
+      <h1 class="script gr-title" data-t="greeting.title"></h1>
+      <p class="gr-sub" data-t="greeting.subtitle"></p>
+      <button class="btn-pink" id="grBtn" data-t="greeting.button"></button>
+    </div>
+  </section>
+
+  <!-- 5. MENU -->
+  <section class="screen bg-main" id="hub">
+    <h1 class="script hub-title fx" style="--i:0" data-t="hub.title"></h1>
+    <div class="hub-row">
+      <button class="hub-item fx" style="--i:1" data-go="message">
+        <img data-decor="envelope" alt="Message"><span class="script" data-t="hub.labels.message"></span>
+      </button>
+      <button class="hub-item fx" style="--i:2" data-go="flower">
+        <img data-decor="flower" alt="Flower"><span class="script" data-t="hub.labels.flower"></span>
+      </button>
+      <button class="hub-item fx" style="--i:3" data-go="gallery">
+        <img data-decor="cake" alt="Cake"><span class="script" data-t="hub.labels.cake"></span>
+      </button>
+    </div>
+  </section>
+
+  <!-- 6a. MESSAGE -->
+  <section class="screen bg-main" id="message">
+    <div class="msg-head">
+      <span class="msg-badge" data-t="message.badge"></span>
+      <h1 class="msg-title" data-t="message.title"></h1>
+      <p class="msg-sub" data-t="message.subtitle"></p>
+    </div>
+    <div class="msg-wrap">
+      <article class="msg-letter">
+        <i class="tape"></i>
+        <div class="msg-orn">♡ ✦ ♡</div>
+        <h2 class="script msg-letter-title" data-t="message.letterTitle"></h2>
+        <div class="msg-text" id="msgText"></div>
+      </article>
+      <div class="msg-photos" id="msgPhotos"></div>
+    </div>
+    <p class="msg-foot" data-t="message.footer"></p>
+    <button class="btn-white" data-go="hub" data-t="message.back"></button>
+  </section>
+
+  <!-- 6b. FLOWER -->
+  <section class="screen bg-main" id="flower">
+    <div class="fl-stage">
+      <div class="fl-center">
+        <img data-decor="flower" alt="Flower">
+        <h2 class="fl-label" data-t="flower.label"></h2>
+      </div>
+      <div class="fl-bubbles" id="flBubbles"></div>
+    </div>
+    <button class="btn-glass" data-go="hub" data-t="flower.back"></button>
+  </section>
+
+  <!-- 6c. GALLERY -->
+  <section class="screen bg-soft" id="gallery">
+    <div class="ga-head">
+      <h1 class="ga-title" data-t="gallery.title"></h1>
+      <p class="ga-desc" data-t="gallery.description"></p>
+    </div>
+    <div class="ga-card">
+      <div class="ga-wrap"><div class="ga-grid" id="gaGrid"></div></div>
+    </div>
+    <div class="ga-actions">
+      <button class="btn-white" data-go="hub" data-t="gallery.back"></button>
+      <button class="btn-pink" data-go="music" data-t="gallery.next"></button>
+    </div>
+    <p class="ga-foot" data-t="gallery.footer"></p>
+  </section>
+
+  <!-- 7. MUSIC -->
+  <section class="screen bg-main" id="music">
+    <h1 class="script big-title mu-title fx" style="--i:0" data-t="music.title"></h1>
+    <img class="mu-vinyl" id="muVinyl" data-decor="vinyl" alt="Vinyl">
+    <div class="mu-card fx" style="--i:1">
+      <div class="mu-player">
+        <p class="mu-song" data-t="music.songTitle"></p>
+        <p class="mu-artist" data-t="music.songArtist"></p>
+        <div class="mu-bar"><i id="muFill"></i></div>
+        <div class="mu-times"><span id="muCur">0:00</span><span id="muDur">0:00</span></div>
+        <button class="mu-play" id="muPlay" aria-label="Putar / jeda"><span id="muIcon">▶</span></button>
+      </div>
+    </div>
+    <img class="mu-deco mu-heart" data-decor="doodle" alt="">
+    <img class="mu-deco mu-cake" data-decor="cake" alt="">
+    <img class="mu-deco mu-balloon" data-decor="balloon" alt="">
+    <button class="btn-glass mu-back" data-go="hub" data-t="music.back"></button>
+  </section>
+
+</main>
+
+<!-- Chatbot (muncul hanya di halaman gallery) -->
+<div class="chat" id="chat">
+  <button class="chat-fab" id="chatFab" aria-label="Buka chat"><span>💌</span><i class="chat-dot"></i></button>
+  <div class="chat-panel" id="chatPanel">
+    <div class="chat-head">
+      <div class="chat-avatar" id="chatAvatar"></div>
+      <div class="chat-who"><b id="chatName"></b><small id="chatSub"></small></div>
+      <button class="chat-close" id="chatClose" aria-label="Tutup">×</button>
+    </div>
+    <div class="chat-prog"><span id="chatLabel"></span><span id="chatCount">0/10</span></div>
+    <div class="chat-bar"><i id="chatFill"></i></div>
+    <div class="chat-msgs" id="chatMsgs"></div>
+    <form class="chat-form" id="chatForm" autocomplete="off">
+      <input id="chatInput" type="text">
+      <button type="submit" id="chatSend"></button>
+    </form>
+  </div>
+</div>
+
+<!-- Transisi fade-hitam & jumpscare -->
+<div id="veil"></div>
+<div id="jump"><div class="jump-img" id="jumpImg"></div></div>
+
+<script src="js/config.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
